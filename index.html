@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"
+      integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS"
+      crossorigin="anonymous"
+    />
+    <title>TransGrimm Web Corpus</title>
+  </head>
+  <body>
+    <!-- TITLE AND NAVBAR -->
+
+    <div id="title">
+      <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">TransGrimm</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active" aria-current="page" href="#">Search</a>
+              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#">Help</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- SEARCH AREA -->
+
+    <section id="search">
+      <form action="#nowhere" class="form-inline">
+        <div class="form-row">
+          <label class="s-a" for="search-item"><strong>Search item:</strong></label>
+          <input
+            class="form-text form-control s-a"
+            id="search-item"
+            type="text"
+            placeholder="Rapunzel"
+          />
+          <button type="button" class="btn btn-secondary s-a search-button">
+            Search <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <!-- <label for="sort-by">Sort:</label>
+
+          <select name="Sort" id="sort-by">
+            <option value="relevance">by relevance</option>
+            <option value="chronologically">chronologically</option>
+            <option value="random">randomly</option>
+          </select> -->
+        </div>
+
+        <!-- <form class="form-inline"></form> -->
+        <div class="form-row">
+          <span class="s-a"><strong>Search options:</strong></span>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="simple-regex"
+            value="simple"
+            id="simple"
+            checked
+          />
+          <label class="form-check-label" for="simple">simple</label>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="simple-regex"
+            value="regex"
+            id="regex"
+          />
+          <label class="form-check-label" for="regex">CQP regex</label>
+          <!-- <button type="button" class="btn btn-outline-dark btn-sm s-a">
+            Advanced options
+          </button> -->
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm s-a"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            id="advanced-search"
+          >
+            Advanced options
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Advanced search options
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="ignore-case"
+                            value="option1"
+                          />
+                          <label class="form-check-label" for="ignore-case"
+                            >Ignore case</label
+                          >
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="exact-search"
+                            value="option2"
+                          />
+                          <label class="form-check-label" for="exact-search"
+                            >Exact match</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="lemma-search"
+                            value="option3"
+                          />
+                          <label class="form-check-label" for="lemma-search"
+                            >Lemmatised</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-dark"
+                    data-bs-dismiss="modal"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <select
+            class="form-select form-select-sm sort-by s-a"
+            aria-label="Default select example"
+          >
+            <option selected>Sort by</option>
+            <option value="1">Relevance</option>
+            <option value="2">Chronology</option>
+            <option value="3">Random</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <span class="s-a"><strong>Select corpora:</strong></span>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="lang-choice-1"
+            name="lang-de"
+            value="lang-de"
+            checked
+          />
+          <label class="form-check-label" for="lang-choice-1">German</label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="lang-choice-2"
+            name="lang-en"
+            value="lang-en"
+            checked
+          />
+          <label class="form-check-label" for="lang-choice-2">English</label>
+          <!-- <button type="button" class="btn btn-outline-dark btn-sm s-a">
+            Custom selection
+          </button> -->
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm s-a"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal2"
+          >
+            Custom selection
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal2"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Custom alignment selection
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col mx-3 bg-light">
+                        <h5>German</h5>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1812"
+                          />
+                          <label class="form-check-label" for="KHM-1812">
+                            KHM 1812
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1819"
+                          />
+                          <label class="form-check-label" for="KHM-1819">
+                            KHM 1819
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1837"
+                          />
+                          <label class="form-check-label" for="KHM-1837">
+                            KHM 1837
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1840"
+                          />
+                          <label class="form-check-label" for="KHM-1840">
+                            KHM 1840
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1843"
+                          />
+                          <label class="form-check-label" for="KHM-1843">
+                            KHM 1843
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1850"
+                          />
+                          <label class="form-check-label" for="KHM-1850">
+                            KHM 1850
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="KHM-1857"
+                          />
+                          <label class="form-check-label" for="KHM-1857">
+                            KHM 1857
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col mx-3 bg-light">
+                        <h5>English</h5>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Paull-1868"
+                          />
+                          <label class="form-check-label" for="Paull-1868">
+                            Paull 1868
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Taylor-1876"
+                          />
+                          <label class="form-check-label" for="Taylor-1876">
+                            Taylor 1876
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Crane-1882"
+                          />
+                          <label class="form-check-label" for="Crane-1882">
+                            Crane 1882
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Hunt-1884"
+                          />
+                          <label class="form-check-label" for="Hunt-1884">
+                            Hunt 1884
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Lucas-1909"
+                          />
+                          <label class="form-check-label" for="Lucas-1909">
+                            Lucas 1909
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Edwardes-1912"
+                          />
+                          <label class="form-check-label" for="Edwardes-1912">
+                            Edwardes 1912
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="Zipes-2014"
+                          />
+                          <label class="form-check-label" for="Zipes-2014">
+                            Zipes 2014
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-dark"
+                    data-bs-dismiss="modal"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- RESULTS -->
+    <div class="container-fluid" id="results-area">
+      <div class="row">
+        <div class="col-6 text-start" id="num-results">Results: 134</div>
+        <div class="col-6 text-end">
+          <div class="dropdown export-results">
+            <button
+              class="btn btn-secondary btn-sm dropdown-toggle"
+              type="button"
+              id="export-button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Export results
+            </button>
+            <ul class="dropdown-menu dropdown-menu-light">
+              <li><a class="dropdown-item active" href="#">.CSV</a></li>
+              <li><a class="dropdown-item" href="#">.XLSX</a></li>
+              <li><a class="dropdown-item" href="#">.TXT</a></li>
+              <li><a class="dropdown-item" href="#">.JSON</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="results-1">
+          <table class="table text-center">
+            <thead>
+              <th scope="col" width="4%">#</th>
+              <th scope="col" width="8%">Subcorpus</th>
+              <th scope="col" width="4%">ID</th>
+              <th scope="col" width="34%">Left context</th>
+              <th scope="col" width="10%">Search item</th>
+              <th scope="col" width="40%">Right context</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Paull 1868</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Translator: H. B. Paull<br>Year: 1868"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l">it belonged to a sorceress , whose power was so</td>
+                <td>
+                  <span class="focus"><strong>great</strong></span>
+                </td>
+                <td class="context-r">
+                  that every one feared her .
+                  <span class="neighbor">One day the woman stood at</span>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Crane 1882</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Translator: Lucy Crane<br>Year: 1882"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l">
+                  <span class="neighbor">one ventured into it ,</span> for it belonged to a
+                  witch of
+                </td>
+                <td>
+                  <span class="focus"><strong>great</strong></span>
+                </td>
+                <td class="context-r">
+                  might , and of whom all the world was afraid .
+                  <span class="neighbor">One day</span>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Hunt 1884</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Translator: Margaret Hunt<br>Year: 1884"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l">because it belonged to an enchantress , who had</td>
+                <td>
+                  <span class="focus"><strong>great</strong></span>
+                </td>
+                <td class="context-r">
+                  power and was dreaded by all the world .
+                  <span class="neighbor">One day the</span>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Lucas 1916</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Translator: Alice Lucas<br>Year: 1916"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l">
+                  <span class="neighbor">nobody dared to enter it , </span>because it
+                  belonged to a
+                </td>
+                <td>
+                  <span class="focus"><strong>powerful</strong></span>
+                </td>
+                <td class="context-r">
+                  Witch , who was feared by everybody .
+                  <span class="neighbor">One day the</span>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>KHM 1837</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Jacob and Wilhelm Grimm<br>Year: 1837"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l"><span class="neighbor">zu gehen, </span>weil er einer Zauberin gehörte , die</td>
+                <td>
+                  <span class="focus"><strong>große</strong></span>
+                </td>
+                <td class="context-r">
+                  Macht hatte , und von aller Welt gefürchtet wurde .
+                  <span class="neighbor">Eines</span>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>KHM 1857</td>
+                <td>
+                  <a
+                    class="meta-tooltip"
+                    href="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    data-bs-title="Title: Rapunzel (KHM 012)<br>Jacob and Wilhelm Grimm<br>Year: 1857"
+                    >012</a
+                  >
+                </td>
+                <td class="context-l"><span class="neighbor">zu gehen, </span>weil er einer Zauberin gehörte , die</td>
+                <td>
+                  <span class="focus"><strong>große</strong></span>
+                </td>
+                <td class="context-r">
+                  Macht hatte und von aller Welt gefürchtet ward .
+                  <span class="neighbor">Eines</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <hr /> -->
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
